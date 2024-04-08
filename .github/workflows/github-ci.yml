@@ -76,12 +76,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: check directory
+        run: ls -al
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
           name: java-app
+      - name: check directory
+        run: ls -al
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - name: Docker login
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USER }} --password-stdin docker.io
       - name: Set Docker BuildKit
