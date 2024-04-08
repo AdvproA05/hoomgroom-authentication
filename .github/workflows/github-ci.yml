@@ -78,7 +78,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: java-app
+          path: build
       - name: Docker login
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USER }} --password-stdin docker.io
       - name: Set Docker BuildKit
