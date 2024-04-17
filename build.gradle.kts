@@ -29,6 +29,7 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
 }
 
 tasks.register<Test>("unitTest") {
