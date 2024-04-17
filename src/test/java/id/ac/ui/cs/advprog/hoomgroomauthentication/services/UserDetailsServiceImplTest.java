@@ -2,7 +2,6 @@ package id.ac.ui.cs.advprog.hoomgroomauthentication.services;
 
 import id.ac.ui.cs.advprog.hoomgroomauthentication.models.User;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.repository.UserRepository;
-import id.ac.ui.cs.advprog.hoomgroomauthentication.security.services.UserDetailsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
