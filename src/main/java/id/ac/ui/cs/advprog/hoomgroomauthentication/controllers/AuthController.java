@@ -3,11 +3,10 @@ package id.ac.ui.cs.advprog.hoomgroomauthentication.controllers;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.models.*;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.repository.*;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.security.jwt.*;
-import id.ac.ui.cs.advprog.hoomgroomauthentication.security.services.*;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.request.*;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.response.*;
 
-import id.ac.ui.cs.advprog.hoomgroomauthentication.services.UserDetailsImpl;
+import id.ac.ui.cs.advprog.hoomgroomauthentication.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,13 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    @Autowired
+
     AuthenticationManager authenticationManager;
 
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
+
     PasswordEncoder encoder;
 
     @Autowired

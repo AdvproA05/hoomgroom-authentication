@@ -4,7 +4,7 @@ import id.ac.ui.cs.advprog.hoomgroomauthentication.models.User;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.request.LoginRequest;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.response.JwtResponse;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.security.jwt.JwtUtils;
-import id.ac.ui.cs.advprog.hoomgroomauthentication.services.UserDetailsImpl;
+import id.ac.ui.cs.advprog.hoomgroomauthentication.security.services.UserDetailsImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

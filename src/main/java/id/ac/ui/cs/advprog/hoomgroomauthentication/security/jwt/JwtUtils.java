@@ -1,6 +1,6 @@
 package id.ac.ui.cs.advprog.hoomgroomauthentication.security.jwt;
 
-import id.ac.ui.cs.advprog.hoomgroomauthentication.services.UserDetailsImpl;
+import id.ac.ui.cs.advprog.hoomgroomauthentication.security.services.UserDetailsImpl;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;

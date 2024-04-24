@@ -1,6 +1,6 @@
 package id.ac.ui.cs.advprog.hoomgroomauthentication.security.jwt;
 
-import id.ac.ui.cs.advprog.hoomgroomauthentication.services.UserDetailsServiceImpl;
+import id.ac.ui.cs.advprog.hoomgroomauthentication.security.services.UserDetailsServiceImpl;
 
 import java.io.IOException;
 

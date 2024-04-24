@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.hoomgroomauthentication.services;
+package id.ac.ui.cs.advprog.hoomgroomauthentication.security.services;
 
 import id.ac.ui.cs.advprog.hoomgroomauthentication.models.User;
 
