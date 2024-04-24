@@ -14,10 +14,8 @@ import java.util.Date;
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-    @Value("${knf.app.jwtExpirationMs}")
-    private int jwtExpirationMs;
-    @Value("${knf.app.jwtSecret}")
-    private String jwtSecret;
+    private final int jwtExpirationMs = 86400000; // 24 jam dalam milidetik
+    private final String jwtSecret = "secretKey";
 
     public boolean validateJwtToken(String authToken) {
         try {

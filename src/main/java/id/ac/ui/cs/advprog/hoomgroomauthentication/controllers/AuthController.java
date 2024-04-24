@@ -30,10 +30,8 @@ public class AuthController {
     @Autowired
     UserRepository userRepository;
 
-
     PasswordEncoder encoder;
 
-    @Autowired
     JwtUtils jwtUtils;
 
     @PostMapping("/signin")

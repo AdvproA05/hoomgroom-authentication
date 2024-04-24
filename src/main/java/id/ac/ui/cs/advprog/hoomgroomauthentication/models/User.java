@@ -3,7 +3,7 @@ package id.ac.ui.cs.advprog.hoomgroomauthentication.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "auser")
+@Table(name = "app_user")
 public class User {
 
     @Id
