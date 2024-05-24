@@ -7,7 +7,6 @@ import id.ac.ui.cs.advprog.hoomgroomauthentication.request.*;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.response.*;
 
 import id.ac.ui.cs.advprog.hoomgroomauthentication.security.services.UserDetailsImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,7 +26,6 @@ public class AuthController {
 
     AuthenticationManager authenticationManager;
 
-    @Autowired
     UserRepository userRepository;
 
     PasswordEncoder encoder;
