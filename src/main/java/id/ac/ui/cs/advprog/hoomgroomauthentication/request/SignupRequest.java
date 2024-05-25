@@ -1,6 +1,8 @@
 package id.ac.ui.cs.advprog.hoomgroomauthentication.request;
 
-public class SignupRequest {
+import id.ac.ui.cs.advprog.hoomgroomauthentication.models.UserDetails;
+
+public class SignupRequest implements UserDetails {
 
     private String fullname;
 
