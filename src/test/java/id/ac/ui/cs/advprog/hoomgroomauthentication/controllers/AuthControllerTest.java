@@ -1,8 +1,11 @@
 package id.ac.ui.cs.advprog.hoomgroomauthentication.controllers;
 
 import id.ac.ui.cs.advprog.hoomgroomauthentication.models.User;
+import id.ac.ui.cs.advprog.hoomgroomauthentication.repository.UserRepository;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.request.LoginRequest;
+import id.ac.ui.cs.advprog.hoomgroomauthentication.request.SignupRequest;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.response.JwtResponse;
+import id.ac.ui.cs.advprog.hoomgroomauthentication.response.MessageResponse;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.security.jwt.JwtUtils;
 import id.ac.ui.cs.advprog.hoomgroomauthentication.security.services.UserDetailsImpl;
 import org.junit.jupiter.api.Test;
@@ -14,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -25,22 +29,27 @@ public class AuthControllerTest {
     private AuthenticationManager authenticationManager;
 
     @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private PasswordEncoder encoder;
+
+    @Mock
     private JwtUtils jwtUtils;
 
     @InjectMocks
     private AuthController authController;
 
     @Test
-    public void testAuthenticateUser() {
-        // Arrange
+    public void shouldAuthenticateUserWhenCredentialsAreValid() {
         LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setUsername("nangis");
-        loginRequest.setPassword("nangskuy15");
+        loginRequest.setUsername("validUser");
+        loginRequest.setPassword("validPassword");
 
         User user = new User();
         user.setId(1L);
-        user.setUsername("nangis");
-        user.setEmail("nanangis@gmail.com");
+        user.setUsername("validUser");
+        user.setEmail("validUser@gmail.com");
 
         Authentication authentication = Mockito.mock(Authentication.class);
         UserDetailsImpl userDetails = UserDetailsImpl.build(user);
@@ -49,15 +58,62 @@ public class AuthControllerTest {
         when(authentication.getPrincipal()).thenReturn(userDetails);
         when(jwtUtils.generateJwtToken(authentication)).thenReturn("jwt_token");
 
-        // Act
         ResponseEntity<?> response = authController.authenticateuser(loginRequest);
 
-        // Assert
         assertEquals(200, response.getStatusCodeValue());
         JwtResponse jwtResponse = (JwtResponse) response.getBody();
         assertEquals("jwt_token", jwtResponse.getAccessToken());
         assertEquals(1, jwtResponse.getId());
-        assertEquals("nangis", jwtResponse.getUsername());
-        assertEquals("nanangis@gmail.com", jwtResponse.getEmail());
+        assertEquals("validUser", jwtResponse.getUsername());
+        assertEquals("validUser@gmail.com", jwtResponse.getEmail());
+    }
+
+    @Test
+    public void shouldRegisterUserWhenCredentialsAreUnique() {
+        SignupRequest signupRequest = new SignupRequest();
+        signupRequest.setUsername("newUser");
+        signupRequest.setEmail("newUser@gmail.com");
+        signupRequest.setPassword("newPassword");
+
+        when(userRepository.existsByUsername(signupRequest.getUsername())).thenReturn(false);
+        when(userRepository.existsByEmail(signupRequest.getEmail())).thenReturn(false);
+
+        ResponseEntity<?> response = authController.registerUser(signupRequest);
+
+        assertEquals(200, response.getStatusCodeValue());
+        MessageResponse messageResponse = (MessageResponse) response.getBody();
+        assertEquals("user registered successfully!", messageResponse.getMessage());
+    }
+
+    @Test
+    public void shouldNotRegisterUserWhenUsernameIsTaken() {
+        SignupRequest signupRequest = new SignupRequest();
+        signupRequest.setUsername("existingUser");
+        signupRequest.setEmail("newUser@gmail.com");
+        signupRequest.setPassword("newPassword");
+
+        when(userRepository.existsByUsername(signupRequest.getUsername())).thenReturn(true);
+
+        ResponseEntity<?> response = authController.registerUser(signupRequest);
+
+        assertEquals(400, response.getStatusCodeValue());
+        MessageResponse messageResponse = (MessageResponse) response.getBody();
+        assertEquals("Error: username is already taken!", messageResponse.getMessage());
+    }
+
+    @Test
+    public void shouldNotRegisterUserWhenEmailIsTaken() {
+        SignupRequest signupRequest = new SignupRequest();
+        signupRequest.setUsername("newUser");
+        signupRequest.setEmail("existingEmail@gmail.com");
+        signupRequest.setPassword("newPassword");
+
+        when(userRepository.existsByEmail(signupRequest.getEmail())).thenReturn(true);
+
+        ResponseEntity<?> response = authController.registerUser(signupRequest);
+
+        assertEquals(400, response.getStatusCodeValue());
+        MessageResponse messageResponse = (MessageResponse) response.getBody();
+        assertEquals("Error: Email is already in use!", messageResponse.getMessage());
     }
 }

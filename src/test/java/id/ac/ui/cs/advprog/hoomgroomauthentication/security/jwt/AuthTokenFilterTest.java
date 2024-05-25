@@ -25,10 +25,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class AuthTokenFilterTest {
-    @Mock
-    private HttpServletRequest request;
-    @Mock
-    private HttpServletResponse response;
 
     @Mock
     private JwtUtils jwtUtils;
