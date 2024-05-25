@@ -56,6 +56,7 @@ dependencies {
 
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:$jwtVersion")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:$jwtVersion")
+	runtimeOnly("io.micrometer:micrometer-registry-prometheus:1.12.5")
 }
 
 tasks.register<Test>("unitTest") {
