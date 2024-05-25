@@ -4,6 +4,7 @@ import id.ac.ui.cs.advprog.hoomgroomauthentication.models.*;
 
 import java.util.Optional;
 
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, String> {
