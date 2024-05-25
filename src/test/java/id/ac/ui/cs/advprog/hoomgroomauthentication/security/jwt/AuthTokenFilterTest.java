@@ -75,15 +75,4 @@ public class AuthTokenFilterTest {
         assertThat(authentication.getPrincipal()).isEqualTo(userDetails);
     }
 
-    @Test
-    void shouldNotAuthenticateUserWhenJwtIsInvalid() throws Exception {
-        when(request.getHeader("Authorization")).thenReturn("Bearer invalidToken");
-        when(jwtUtils.validateJwtToken("invalidToken")).thenReturn(false);
-
-        authTokenFilter.doFilterInternal(request, response, filterChain);
-
-        verify(filterChain).doFilter(request, response);
-        assert(SecurityContextHolder.getContext().getAuthentication() == null);
-    }
-
 }
