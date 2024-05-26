@@ -1,6 +1,8 @@
 # hoomgroom-authentication
 HoomGroom-Authentication adalah bagian dari repository backend untuk aplikasi HoomGroom. Repository ini memanfaatkan JWT Service dan bertanggung jawab khusus untuk implementasi autentikasi dalam aplikasi.
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HoomGroomA-5_hoomgroom-authentication&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=HoomGroomA-5_hoomgroom-authentication)
+
 ## Kelompok A-5 👨‍💻
 > [Virgillia Yeala Prabowo](https://github.com/VirgilliaYeala) `(2206829856)` <br>
 > [Emmanuel Patrick](https://github.com/g0lgi) `(2206081420)` <br>
