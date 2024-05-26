@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -28,6 +31,9 @@ class WebSecurityConfigTest {
 
     @Mock
     private UserDetailsServiceImpl userDetailsService;
+
+    @Mock
+    private AuthenticationConfiguration authenticationConfiguration;
 
     @InjectMocks
     private WebSecurityConfig webSecurityConfig;
@@ -43,5 +49,19 @@ class WebSecurityConfigTest {
         AuthTokenFilter authTokenFilter = webSecurityConfig.authenticationJwtTokenFilter();
         assert authTokenFilter != null;
     }
+
+    @Test
+    void authenticationManagerConfiguredCorrectly() throws Exception {
+        AuthenticationManager authenticationManager = mock(AuthenticationManager.class);
+        when(authenticationConfiguration.getAuthenticationManager()).thenReturn(authenticationManager);
+
+        AuthenticationManager result = webSecurityConfig.authenticationManager(authenticationConfiguration);
+
+        verify(authenticationConfiguration).getAuthenticationManager();
+
+        assert result != null;
+        assert result.equals(authenticationManager);
+    }
+
 }
 
